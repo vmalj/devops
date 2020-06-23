@@ -1,0 +1,34 @@
+﻿@page "/"
+
+@using BlazorApp.Data
+@using BlazorApp.Data.DTOs
+@inject MessageService MessageService
+
+@if (message == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@message.Message</td>
+            </tr>
+        </tbody>
+    </table>
+}
+
+@code {
+    private MessageItemDTO message;
+
+    protected override async Task OnInitializedAsync()
+    {
+        message = await MessageService.GetMessage();
+    }
+}
